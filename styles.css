@@ -63,6 +63,7 @@ body {
 img {
   max-width: 100%;
   display: block;
+  height: auto;
 }
 
 button {
@@ -81,7 +82,7 @@ a {
 .header {
   background: var(--White);
   border-bottom: 1px solid var(--Light-grey);
-  height: var(--height-72);
+  min-height: var(--height-72);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,14 +95,14 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.logo {
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40"><text x="0" y="25" fill="%2355be24" font-size="18" font-weight="bold">ЧАГАНСКАЯ СОШ</text></svg>') no-repeat left center;
-  background-size: contain;
-  width: 170px;
-  height: 40px;
-  text-indent: -9999px;
+.logo-text {
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 700;
+  color: #55be24;
 }
 
 .nav-menu {
@@ -114,6 +115,8 @@ a {
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s;
+  padding: 8px 0;
+  display: inline-block;
 }
 
 .nav-item:hover,
@@ -130,6 +133,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 /* ===== BREADCRUMB ===== */
@@ -147,6 +151,7 @@ a {
   font-size: var(--fs-16);
   font-family: 'Jost', sans-serif;
   color: var(--Dark-gray);
+  flex-wrap: wrap;
 }
 
 .breadcrumb-current {
@@ -207,34 +212,214 @@ a {
   border: none;
   transition: 0.2s;
   cursor: pointer;
+  display: inline-block;
+  text-align: center;
 }
 
 .green-btn:hover {
   background: #3d8a1a;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE (мобильные и планшеты) ===== */
 @media (max-width: 1024px) {
   .header-inner {
+    flex-direction: row;
     flex-wrap: wrap;
-    height: auto;
-    padding: 12px 20px;
-    gap: 12px;
+    justify-content: space-between;
   }
   .nav-menu {
-    order: 3;
-    width: 100%;
-    justify-content: center;
+    order: 2;
+    width: auto;
     gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+  .search-btn {
+    order: 1;
   }
   .footer-inner {
     flex-direction: column;
+  }
+  .hero-content {
+    position: relative !important;
+    transform: none !important;
+    width: 90% !important;
+    margin: 20px auto !important;
+    left: auto !important;
+    top: auto !important;
+  }
+  .hero-img {
+    position: relative !important;
+    width: 90% !important;
+    right: auto !important;
+    margin: 20px auto !important;
+  }
+  .rating-block,
+  .promo-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .rating-content h2:after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .rating-list li {
+    justify-content: center;
+  }
+  .promo-content {
+    text-align: center;
   }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 0 16px;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 24px;
+  }
+  .nav-item {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+  .search-btn {
+    align-self: flex-end;
+  }
+  .hero-title {
+    font-size: 1.6rem !important;
+  }
+  .two-cols {
+    flex-direction: column;
+  }
+  .info-card {
+    width: 100%;
+  }
+  .cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .gallery-item {
+    width: 260px;
+  }
+  .gallery-item img {
+    height: 200px;
+  }
+  .news-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .news-card {
+    margin-bottom: 20px;
+  }
+  .schedule-table th,
+  .schedule-table td {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  .schedule-table td:first-child {
+    width: 90px;
+  }
+  .class-dropdown {
+    width: 90%;
+    max-width: 280px;
+    font-size: 18px;
+    padding: 10px 16px;
+  }
+  .promo-banner .green-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+  .rating-content .green-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+  .footer-contacts div {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .footer-about p {
+    font-size: 16px;
+  }
+  .section-title {
+    font-size: 24px !important;
+  }
+  .section-card {
+    padding: 20px !important;
+  }
+  #map {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  h1, .hero-title {
+    font-size: 1.4rem !important;
+  }
+  h2, .gallery-title, .section-title {
+    font-size: 1.3rem !important;
+  }
+  .hero-content {
+    padding: 20px 16px !important;
+  }
+  .hero-text {
+    font-size: 14px;
+  }
+  .info-card h3 {
+    font-size: 20px;
+  }
+  .info-card li {
+    font-size: 16px;
+  }
+  .card p {
+    font-size: 14px;
+  }
+  .promo-text {
+    font-size: 18px;
+  }
+  .rating-text {
+    font-size: 15px;
+  }
+  .news-title {
+    font-size: 18px;
+  }
+  .news-excerpt {
+    font-size: 14px;
+  }
+  .breadcrumb-inner {
+    font-size: 12px;
+  }
+  .green-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    width: auto;
+    min-width: 160px;
+  }
+  .class-dropdown {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  .gallery-controls .arrow-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+  .dots .dot {
+    width: 10px;
+    height: 10px;
   }
 }
