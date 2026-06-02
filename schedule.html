@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Чаганская СОШ — Расписание уроков</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .schedule-main {
+      padding: 40px 0 70px;
+    }
+    .class-selector-block {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .class-dropdown {
+      background: var(--White);
+      border: 2px solid var(--Green);
+      border-radius: 60px;
+      padding: 12px 24px;
+      font-size: 20px;
+      font-weight: 600;
+      font-family: 'Exo', sans-serif;
+      color: var(--Black);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+      min-width: 200px;
+      text-align: center;
+    }
+    .class-dropdown:hover {
+      background: var(--Green);
+      color: white;
+    }
+    .schedule-table-container {
+      overflow-x: auto;
+      border-radius: 24px;
+      box-shadow: var(--Shadow-XL);
+      background: white;
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Jost', sans-serif;
+      min-width: 600px;
+    }
+    .schedule-table th,
+    .schedule-table td {
+      border: 1px solid var(--Light-grey);
+      padding: 16px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .schedule-table th {
+      background: var(--Green);
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      text-align: center;
+    }
+    .schedule-table td:first-child {
+      background: var(--White-grey);
+      font-weight: 600;
+      width: 120px;
+      text-align: center;
+    }
+    .lesson-item {
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #eee;
+    }
+    .lesson-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .lesson-time {
+      font-size: 13px;
+      color: var(--Green);
+      font-weight: 500;
+    }
+    .lesson-name {
+      font-weight: 600;
+      margin: 4px 0;
+    }
+    .lesson-teacher {
+      font-size: 13px;
+      color: var(--Dark-gray);
+    }
+    .no-lesson {
+      color: var(--Grey);
+      font-style: italic;
+    }
+    @media (max-width: 768px) {
+      .schedule-table th,
+      .schedule-table td {
+        padding: 10px 8px;
+        font-size: 14px;
+      }
+      .schedule-table td:first-child {
+        width: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-text" style="font-size: 22px; font-weight: 700; color: #55be24;">Чаганская СОШ</div>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-item">Главная</a>
+        <a href="schedule.html" class="nav-item active">Расписание</a>
+        <a href="news.html" class="nav-item">Новости</a>
+        <a href="sveden.html" class="nav-item">Сведения</a>
+      </div>
+      <button class="search-btn" aria-label="Поиск">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.5 15.5L19 19M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#55be24" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <span>Главная</span>
+      <span>/</span>
+      <span class="breadcrumb-current">Расписание уроков</span>
+    </div>
+  </div>
+
+  <main class="schedule-main">
+    <div class="container">
+      <div class="class-selector-block">
+        <select id="classSelect" class="class-dropdown">
+          <option value="1">1 класс</option>
+          <option value="2">2 класс</option>
+          <option value="3">3 класс</option>
+          <option value="4">4 класс</option>
+          <option value="5" selected>5 класс</option>
+          <option value="6">6 класс</option>
+          <option value="7">7 класс</option>
+          <option value="8">8 класс</option>
+          <option value="9">9 класс</option>
+          <option value="10">10 класс</option>
+          <option value="11">11 класс</option>
+        </select>
+      </div>
+
+      <div class="schedule-table-container">
+        <table class="schedule-table" id="scheduleTable">
+          <thead>
+            <tr><th>День недели</th><th>Уроки</th></tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-about"><p>Муниципальное казенное общеобразовательное учреждение "Чаганская средняя общеобразовательная школа"</p><div>Астраханская обл., Камызякский р-н, с. Чаган</div></div>
+      <div class="footer-contacts"><div>📞 8(85145)94-2-15 (директор/секретарь)</div><div>✉️ <a href="mailto:chaganshkoll@mail.ru">chaganshkoll@mail.ru</a></div><div>🌐 <a href="https://30kam-chag.edusite.ru/" target="_blank">30kam-chag.edusite.ru</a></div></div>
+    </div>
+    <div class="copyright">© 2025 Чаганская СОШ. Все права защищены.</div>
+  </footer>
+
+  <script>
+    const scheduleData = {
+      1: {"Понедельник":["Русский язык","Математика","Чтение","Окружающий мир","Физкультура"],"Вторник":["Математика","Русский язык","Музыка","Рисование","Чтение"],"Среда":["Чтение","Русский язык","Математика","Физкультура","Технология"],"Четверг":["Математика","Русский язык","Окружающий мир","Чтение","Английский язык"],"Пятница":["Русский язык","Математика","Физкультура","Музыка","Чтение"],"Суббота":["Классный час","Внеурочная деятельность"]},
+      2: {"Понедельник":["Русский язык","Математика","Литературное чтение","Окружающий мир","Английский язык"],"Вторник":["Математика","Русский язык","Технология","Физкультура","Литературное чтение"],"Среда":["Литературное чтение","Русский язык","Математика","Музыка","Окружающий мир"],"Четверг":["Математика","Русский язык","Английский язык","Физкультура","Рисование"],"Пятница":["Русский язык","Математика","Литературное чтение","Информатика","Внеурочка"],"Суббота":["Классный час","Проектная деятельность"]},
+      3: {"Понедельник":["Русский язык","Математика","Литература","Английский язык","Физкультура"],"Вторник":["Математика","Русский язык","Окружающий мир","Музыка","Технология"],"Среда":["Литература","Русский язык","Математика","Физкультура","Английский язык"],"Четверг":["Математика","Русский язык","Информатика","Окружающий мир","Рисование"],"Пятница":["Русский язык","Математика","Литература","Физкультура","Внеурочка"],"Суббота":["Классный час","Шахматы"]},
+      4: {"Понедельник":["Русский язык","Математика","Литература","Английский язык","Физкультура"],"Вторник":["Математика","Русский язык","История","Технология","Окружающий мир"],"Среда":["Литература","Русский язык","Математика","Физкультура","Музыка"],"Четверг":["Математика","Русский язык","Информатика","Английский язык","Окружающий мир"],"Пятница":["Русский язык","Математика","Литература","Физкультура","Внеурочка"],"Суббота":["Классный час","Проект"]},
+      5: {"Понедельник":["Русский язык","Математика","Литература","История","Английский язык","Физкультура"],"Вторник":["Математика","Русский язык","Биология","География","ОБЖ","Музыка"],"Среда":["Литература","Русский язык","Математика","Физика","Английский язык","Технология"],"Четверг":["Математика","Русский язык","Информатика","История","Обществознание","Физкультура"],"Пятница":["Русский язык","Математика","Литература","Биология","Английский язык","Внеурочка"],"Суббота":["Классный час","Проектная деятельность","Факультатив"]},
+      6: {"Понедельник":["Русский язык","Математика","Литература","История","Английский язык","Физкультура"],"Вторник":["Математика","Русский язык","Биология","География","Физика","Музыка"],"Среда":["Литература","Русский язык","Математика","Обществознание","Английский язык","Технология"],"Четверг":["Математика","Русский язык","Информатика","История","ОБЖ","Физкультура"],"Пятница":["Русский язык","Математика","Литература","Физика","Английский язык","Внеурочка"],"Суббота":["Классный час","Электив","Факультатив"]},
+      7: {"Понедельник":["Русский язык","Алгебра","Литература","Физика","Английский язык","Физкультура"],"Вторник":["Алгебра","Русский язык","География","Биология","История","ОБЖ"],"Среда":["Литература","Русский язык","Геометрия","Информатика","Английский язык","Технология"],"Четверг":["Алгебра","Русский язык","Физика","Обществознание","Химия","Физкультура"],"Пятница":["Русский язык","Геометрия","Литература","Английский язык","Биология","Внеурочка"],"Суббота":["Классный час","Проект","Электив"]},
+      8: {"Понедельник":["Русский язык","Алгебра","Литература","Физика","Английский язык","Физкультура"],"Вторник":["Алгебра","Русский язык","Химия","История","ОБЖ","География"],"Среда":["Литература","Русский язык","Геометрия","Информатика","Английский язык","Биология"],"Четверг":["Алгебра","Русский язык","Физика","Обществознание","Химия","Физкультура"],"Пятница":["Русский язык","Геометрия","Литература","Английский язык","Физика","Внеурочка"],"Суббота":["Классный час","Электив","Факультатив"]},
+      9: {"Понедельник":["Русский язык","Алгебра","Литература","Физика","Английский язык","Физкультура"],"Вторник":["Алгебра","Русский язык","Химия","История","ОБЖ","География"],"Среда":["Литература","Русский язык","Геометрия","Информатика","Английский язык","Биология"],"Четверг":["Алгебра","Русский язык","Физика","Обществознание","Химия","Физкультура"],"Пятница":["Русский язык","Геометрия","Литература","Английский язык","Физика","Внеурочка"],"Суббота":["Классный час","Электив","Подготовка к ОГЭ"]},
+      10: {"Понедельник":["Русский язык","Алгебра","Литература","Физика","Английский язык","Физкультура"],"Вторник":["Алгебра","Русский язык","Химия","История","ОБЖ","Астрономия"],"Среда":["Литература","Русский язык","Геометрия","Информатика","Английский язык","Биология"],"Четверг":["Алгебра","Русский язык","Физика","Обществознание","Экономика","Физкультура"],"Пятница":["Русский язык","Геометрия","Литература","Английский язык","Право","Внеурочка"],"Суббота":["Классный час","Электив","Проект"]},
+      11: {"Понедельник":["Русский язык","Алгебра","Литература","Физика","Английский язык","Физкультура"],"Вторник":["Алгебра","Русский язык","Химия","История","ОБЖ","Астрономия"],"Среда":["Литература","Русский язык","Геометрия","Информатика","Английский язык","Биология"],"Четверг":["Алгебра","Русский язык","Физика","Обществознание","Экономика","Физкультура"],"Пятница":["Русский язык","Геометрия","Литература","Английский язык","Право","Внеурочка"],"Суббота":["Классный час","Электив","Подготовка к ЕГЭ"]}
+    };
+    const weekDays = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+
+    function renderSchedule(grade) {
+      const tbody = document.getElementById('scheduleBody');
+      const data = scheduleData[grade];
+      if (!data) return;
+      tbody.innerHTML = '';
+      weekDays.forEach(day => {
+        const lessons = data[day] || [];
+        const row = document.createElement('tr');
+        const dayCell = document.createElement('td');
+        dayCell.textContent = day;
+        row.appendChild(dayCell);
+        const lessonsCell = document.createElement('td');
+        if (lessons.length === 0) {
+          lessonsCell.innerHTML = '<div class="no-lesson">Нет уроков</div>';
+        } else {
+          lessonsCell.innerHTML = lessons.map((lesson, idx) => {
+            const startTime = 8 + idx;
+            const timeStr = `${startTime}:00 - ${startTime + 1}:00`;
+            return `<div class="lesson-item"><div class="lesson-time">${timeStr}</div><div class="lesson-name">${lesson}</div><div class="lesson-teacher">Учитель</div></div>`;
+          }).join('');
+        }
+        row.appendChild(lessonsCell);
+        tbody.appendChild(row);
+      });
+    }
+    const classSelect = document.getElementById('classSelect');
+    if (classSelect) {
+      classSelect.addEventListener('change', (e) => renderSchedule(e.target.value));
+      renderSchedule('5');
+    }
+  </script>
+</body>
+</html>

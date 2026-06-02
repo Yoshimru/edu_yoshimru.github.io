@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Чаганская СОШ — Сведения об организации</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Подключение Яндекс.Карт -->
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ&lang=ru_RU" type="text/javascript"></script>
+  <style>
+    .content-block { padding: 50px 0 70px; }
+    .section-card { background: var(--White); border-radius: var(--br-20); box-shadow: var(--Shadow-XL); padding: 30px; margin-bottom: 40px; border: 1px solid var(--Light-grey); }
+    .section-title { font-size: var(--fs-28); font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 3px solid var(--Green); display: inline-block; }
+    .info-grid { display: flex; flex-wrap: wrap; gap: 30px; }
+    .info-col { flex: 1; min-width: 250px; }
+    .info-label { font-weight: 600; font-size: var(--fs-18); margin-bottom: 12px; color: var(--Green); }
+    .info-text { font-size: var(--fs-18); line-height: 1.5; color: var(--Dark-gray); font-family: 'Jost', sans-serif; }
+    .info-text a { color: var(--Black); text-decoration: underline; }
+    .map-placeholder { margin-top: 20px; border-radius: 20px; overflow: hidden; box-shadow: var(--Shadow-XL); }
+    #map { width: 100%; height: 400px; }
+    .docs-list { list-style: none; padding: 0; }
+    .docs-list li { margin-bottom: 14px; font-size: var(--fs-18); font-family: 'Jost', sans-serif; }
+    .docs-list a { text-decoration: underline; color: var(--Green); font-weight: 500; }
+    .docs-list a:hover { color: var(--Black); }
+    .badge { background: var(--White-grey); padding: 4px 12px; border-radius: 30px; font-size: 14px; color: var(--Dark-gray); display: inline-block; }
+    @media (max-width: 1024px) { .info-grid { flex-direction: column; gap: 20px; } }
+    @media (max-width: 768px) { .section-title { font-size: 24px; } .section-card { padding: 20px; } #map { height: 300px; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-text" style="font-size: 22px; font-weight: 700; color: #55be24;">Чаганская СОШ</div>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-item">Главная</a>
+        <a href="schedule.html" class="nav-item">Расписание</a>
+        <a href="news.html" class="nav-item">Новости</a>
+        <a href="sveden.html" class="nav-item">Сведения</a>
+      </div>
+      <button class="search-btn" aria-label="Поиск">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.5 15.5L19 19M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#55be24" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner"><span>Главная</span><span>/</span><span class="breadcrumb-current">Сведения об образовательной организации</span></div>
+  </div>
+
+  <main class="content-block">
+    <div class="container">
+      <div class="section-card"><h1 class="section-title">Основные сведения</h1><div class="info-grid"><div class="info-col"><div class="info-label">Полное наименование</div><div class="info-text">Муниципальное казенное общеобразовательное учреждение "Чаганская средняя общеобразовательная школа"</div><div class="info-label" style="margin-top:20px;">Сокращённое наименование</div><div class="info-text">МКОУ "Чаганская СОШ"</div><div class="info-label" style="margin-top:20px;">Дата создания</div><div class="info-text">31 августа 1988 года</div></div><div class="info-col"><div class="info-label">Тип образовательной организации</div><div class="info-text">Детский сад, средняя общеобразовательная школа</div><div class="info-label" style="margin-top:20px;">ОГРН</div><div class="info-text">1023000838233</div><div class="info-label" style="margin-top:20px;">ИНН</div><div class="info-text">3005002511</div></div></div></div>
+
+      <div class="section-card"><h2 class="section-title">Учредители</h2><div class="info-grid"><div class="info-col"><div class="info-label">Учредитель</div><div class="info-text">Муниципальное образование «Камызякский район» в лице главы администрации МО «Камызякский район Астраханской области»</div><div class="info-label" style="margin-top:20px;">Руководитель</div><div class="info-text">Черкасов Михаил Михайлович</div></div><div class="info-col"><div class="info-label">Телефон учредителя</div><div class="info-text"><a href="tel:88514591492">8 (85145) 9-14-92</a></div><div class="info-label" style="margin-top:20px;">Сайт учредителя</div><div class="info-text"><a href="http://kamyzak.ru/" target="_blank">http://kamyzak.ru/</a></div><div class="info-label" style="margin-top:20px;">Email</div><div class="info-text"><a href="mailto:admkam@kam.astranet.ru">admkam@kam.astranet.ru</a></div></div></div></div>
+
+      <div class="section-card"><h2 class="section-title">Место нахождения</h2><div class="info-text" style="margin-bottom:20px;"><strong>Юридический адрес:</strong> 416303, Астраханская обл., Камызякский р-н, с. Чаган, ул. Школьная, дом 1</div>
+        <div class="map-placeholder"><div id="map"></div></div>
+      </div>
+
+      <div class="section-card"><h2 class="section-title">Режим и график работы</h2><div class="info-grid"><div class="info-col"><div class="info-label">Режим работы учреждения</div><div class="info-text">Понедельник – пятница, 1 смена, с 8:00 до 17:00</div></div><div class="info-col"><div class="info-label">График работы администрации</div><div class="info-text">Понедельник – пятница с 8:00 до 17:00, выходные – суббота, воскресенье</div></div></div></div>
+
+      <div class="section-card"><h2 class="section-title">Контактная информация</h2><div class="info-grid"><div class="info-col"><div class="info-label">Телефон директора</div><div class="info-text"><a href="tel:8(85145)94-2-15">8 (85145) 94-2-15</a></div><div class="info-label" style="margin-top:16px;">Телефон секретаря</div><div class="info-text"><a href="tel:8(85145)94-2-15">8 (85145) 94-2-15</a></div><div class="info-label" style="margin-top:16px;">Факс</div><div class="info-text">(851) 459 42 15</div></div><div class="info-col"><div class="info-label">Электронная почта</div><div class="info-text"><a href="mailto:chaganshkoll@mail.ru">chaganshkoll@mail.ru</a></div><div class="info-label" style="margin-top:16px;">Официальный сайт</div><div class="info-text"><a href="https://30kam-chag.edusite.ru/" target="_blank">30kam-chag.edusite.ru</a></div><div class="info-label" style="margin-top:16px;">Адрес места осуществления деятельности</div><div class="info-text">с. Чаган, ул. Школьная, 1 (школа), ул. Ленина, 10 (детский сад)</div></div></div></div>
+
+      <div class="section-card"><h2 class="section-title">Лицензия на образовательную деятельность</h2><ul class="docs-list"><li><a href="https://30kam-chag.edusite.ru/sveden/files/6b2850d6-cfb4-4e4c-82b3-de5d2133da24.pdf" target="_blank">📄 Лицензия (PDF; 9.26 Мб)</a></li><li><a href="https://30kam-chag.edusite.ru/sveden/files/8caaf668-7a3d-4bff-8da4-8ddc3ec7fb23.pdf" target="_blank">📄 Приложение к лицензии (PDF; 7.9 Мб)</a></li><li><a href="https://30kam-chag.edusite.ru/sveden/files/505232eebe2483cc75971dfd022f645a.pdf" target="_blank">📄 Выписка из реестра лицензий (PDF; 73.44 Кб)</a></li></ul></div>
+
+      <div class="section-card"><h2 class="section-title">Государственная аккредитация</h2><ul class="docs-list"><li><a href="https://30kam-chag.edusite.ru/sveden/files/4c52a0264599fd193db473893f8269e6.pdf" target="_blank">📜 Свидетельство об аккредитации (PDF; 3.66 Мб)</a></li><li><a href="https://30kam-chag.edusite.ru/sveden/files/196ade36b3d12de52676b8d83bd7acfc.pdf" target="_blank">📜 Приложение к свидетельству (PDF; 3.7 Мб)</a></li><li><a href="https://30kam-chag.edusite.ru/sveden/files/5669692df7c30ed9b3b17bad7a9216fb_1.pdf" target="_blank">📜 Приказ №48-а (PDF; 2.46 Мб)</a></li><li><a href="https://30kam-chag.edusite.ru/sveden/files/c5e57f833b15281f1e70cf03a9aa6e8a.pdf" target="_blank">📜 Выписка из реестра аккредитованных программ (PDF; 84.17 Кб)</a></li></ul></div>
+
+      <div class="section-card"><h2 class="section-title">Места осуществления образовательной деятельности</h2><div class="info-text"><p><strong>Основное здание школы:</strong> с. Чаган, ул. Школьная, 1</p><p><strong>Дошкольное отделение:</strong> ул. Ленина, 10</p><p class="badge">Все адреса имеют действующую лицензию</p></div></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-about"><p>Муниципальное казенное общеобразовательное учреждение "Чаганская средняя общеобразовательная школа"</p><div>Астраханская обл., Камызякский р-н, с. Чаган, ул. Школьная, 1</div></div>
+      <div class="footer-contacts"><div>📞 8 (85145) 94-2-15 (директор/секретарь)</div><div>✉️ <a href="mailto:chaganshkoll@mail.ru">chaganshkoll@mail.ru</a></div><div>🌐 <a href="https://30kam-chag.edusite.ru/" target="_blank">30kam-chag.edusite.ru</a></div></div>
+    </div>
+    <div class="copyright">© 2025 Чаганская СОШ. Все права защищены.</div>
+  </footer>
+
+  <script>
+    ymaps.ready(init);
+    function init() {
+      var map = new ymaps.Map("map", {
+        center: [46.175043, 47.972713],
+        zoom: 16,
+        controls: ['zoomControl', 'fullscreenControl']
+      });
+      var placemark = new ymaps.Placemark([46.175043, 47.972713], {
+        balloonContent: '<strong>МКОУ "Чаганская СОШ"</strong><br>Астраханская обл., Камызякский р-н, с. Чаган, ул. Школьная, 1'
+      }, {
+        preset: 'islands#greenIcon'
+      });
+      map.geoObjects.add(placemark);
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
