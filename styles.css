@@ -63,7 +63,6 @@ body {
 img {
   max-width: 100%;
   display: block;
-  height: auto;
 }
 
 button {
@@ -96,13 +95,14 @@ a {
   justify-content: space-between;
   padding: 0 20px;
   flex-wrap: wrap;
-  gap: 12px;
 }
 
-.logo-text {
-  font-size: clamp(18px, 5vw, 22px);
-  font-weight: 700;
-  color: #55be24;
+.logo {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40"><text x="0" y="25" fill="%2355be24" font-size="18" font-weight="bold">ЧАГАНСКАЯ СОШ</text></svg>') no-repeat left center;
+  background-size: contain;
+  width: 170px;
+  height: 40px;
+  text-indent: -9999px;
 }
 
 .nav-menu {
@@ -126,6 +126,7 @@ a {
 
 .search-btn {
   width: var(--width-48);
+  min-width: 44px;
   height: var(--height-48);
   border-radius: var(--br-24);
   border: 2px solid var(--Green);
@@ -133,7 +134,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
 /* ===== BREADCRUMB ===== */
@@ -151,7 +151,6 @@ a {
   font-size: var(--fs-16);
   font-family: 'Jost', sans-serif;
   color: var(--Dark-gray);
-  flex-wrap: wrap;
 }
 
 .breadcrumb-current {
@@ -220,42 +219,68 @@ a {
   background: #3d8a1a;
 }
 
-/* ===== RESPONSIVE (мобильные и планшеты) ===== */
+/* ===== HERO SECTION (исправление для мобильных) ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  background: #eef4e9;
+}
+
+.hero-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative; /* чтобы не выпадать из потока */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  max-width: 560px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(3px);
+  padding: 32px 28px;
+  border-radius: 28px;
+}
+
+.hero-img {
+  width: 45%;
+  max-width: 640px;
+  position: absolute;
+  right: 4%;
+  bottom: 10%;
+  border-radius: 32px;
+  object-fit: cover;
+  box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+}
+
+/* ===== RESPONSIVE CORE ===== */
 @media (max-width: 1024px) {
   .header-inner {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 12px;
   }
   .nav-menu {
-    order: 2;
-    width: auto;
+    order: 3;
+    width: 100%;
+    justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
-  }
-  .search-btn {
-    order: 1;
+    margin-top: 8px;
   }
   .footer-inner {
     flex-direction: column;
   }
-  .hero-content {
-    position: relative !important;
-    transform: none !important;
-    width: 90% !important;
-    margin: 20px auto !important;
-    left: auto !important;
-    top: auto !important;
+  .two-cols {
+    flex-direction: column;
   }
-  .hero-img {
-    position: relative !important;
-    width: 90% !important;
-    right: auto !important;
-    margin: 20px auto !important;
+  .cards-grid {
+    justify-content: center;
   }
-  .rating-block,
-  .promo-banner {
+  .rating-block {
     flex-direction: column;
     text-align: center;
   }
@@ -266,160 +291,359 @@ a {
   .rating-list li {
     justify-content: center;
   }
-  .promo-content {
+  .promo-banner {
+    flex-direction: column;
     text-align: center;
+  }
+
+  /* Исправление Hero на планшетах */
+  .hero-content {
+    position: relative;
+    transform: none;
+    left: 0;
+    top: 0;
+    width: 90%;
+    margin: 20px auto;
+  }
+  .hero-img {
+    position: relative;
+    width: 90%;
+    right: auto;
+    margin: 20px auto;
+  }
+  .hero-bg {
+    margin-bottom: 0;
   }
 }
 
 @media (max-width: 768px) {
+  :root {
+    --fs-32: 28px;
+    --fs-28: 24px;
+    --fs-24: 20px;
+    --fs-20: 18px;
+    --fs-18: 16px;
+  }
+
   .container {
     padding: 0 16px;
   }
+
   .header-inner {
-    flex-direction: column;
-    align-items: center;
+    padding: 8px 16px;
+  }
+
+  .nav-menu {
     gap: 16px;
   }
-  .nav-menu {
-    width: 100%;
-    justify-content: center;
-    gap: 24px;
-  }
+
   .nav-item {
-    font-size: 18px;
-    padding: 8px 12px;
+    font-size: 14px;
+    padding: 6px 0;
   }
+
   .search-btn {
-    align-self: flex-end;
+    width: 40px;
+    height: 40px;
   }
+
+  .hero-content {
+    width: 95%;
+    padding: 20px;
+    margin: 16px auto;
+  }
+
   .hero-title {
-    font-size: 1.6rem !important;
+    font-size: 1.6rem;
   }
-  .two-cols {
+
+  .hero-img {
+    width: 95%;
+    margin: 0 auto 20px;
+  }
+
+  .hero-bg {
+    order: 1;
+  }
+
+  .two-cols,
+  .cards-grid,
+  .news-grid {
     flex-direction: column;
+    align-items: stretch;
   }
-  .info-card {
+
+  .info-card,
+  .card,
+  .news-card {
     width: 100%;
   }
-  .cards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+
   .card {
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
+    padding: 20px;
   }
+
+  .card img {
+    width: 80px;
+    margin: 0 auto 15px;
+  }
+
   .gallery-item {
     width: 260px;
   }
-  .gallery-item img {
-    height: 200px;
+
+  .gallery-track {
+    gap: 12px;
+    padding-bottom: 12px;
   }
+
+  .arrow-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dot.active {
+    width: 24px;
+  }
+
+  .promo-banner {
+    padding: 24px 20px;
+  }
+
+  .promo-text {
+    font-size: 18px;
+  }
+
+  .rating-block {
+    padding: 30px 20px;
+  }
+
+  .rating-block h2 {
+    font-size: 22px;
+  }
+
+  .footer {
+    margin-top: 40px;
+    padding: 30px 0 20px;
+  }
+
+  .footer-about p {
+    font-size: 16px;
+  }
+
+  .footer-contacts {
+    font-size: 14px;
+  }
+
+  .green-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* Страница новостей */
+  .news-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter input {
+    width: 100%;
+  }
+
   .news-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
-  .news-card {
-    margin-bottom: 20px;
+
+  .sidebar {
+    order: 2;
   }
+
+  .category-list {
+    justify-content: center;
+  }
+
+  /* Расписание */
+  .class-dropdown {
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 280px;
+  }
+
   .schedule-table th,
   .schedule-table td {
     padding: 10px 8px;
     font-size: 14px;
   }
+
   .schedule-table td:first-child {
     width: 90px;
   }
-  .class-dropdown {
-    width: 90%;
-    max-width: 280px;
-    font-size: 18px;
-    padding: 10px 16px;
+
+  .lesson-time {
+    font-size: 12px;
   }
-  .promo-banner .green-btn {
-    width: 100%;
-    max-width: 280px;
-  }
-  .rating-content .green-btn {
-    width: 100%;
-    max-width: 280px;
-  }
-  .footer-contacts div {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  .footer-about p {
-    font-size: 16px;
-  }
-  .section-title {
-    font-size: 24px !important;
-  }
-  .section-card {
-    padding: 20px !important;
-  }
+
+  /* Карта */
   #map {
-    height: 300px !important;
+    height: 300px;
   }
 }
 
 @media (max-width: 480px) {
-  body {
-    font-size: 14px;
+  .hero-title {
+    font-size: 1.4rem;
   }
-  h1, .hero-title {
-    font-size: 1.4rem !important;
-  }
-  h2, .gallery-title, .section-title {
-    font-size: 1.3rem !important;
-  }
+
   .hero-content {
-    padding: 20px 16px !important;
+    padding: 16px;
   }
+
   .hero-text {
     font-size: 14px;
   }
-  .info-card h3 {
+
+  .nav-menu {
+    gap: 12px;
+  }
+
+  .nav-item {
+    font-size: 13px;
+  }
+
+  .gallery-item {
+    width: 220px;
+  }
+
+  .gallery-item img {
+    height: 180px;
+  }
+
+  .arrow-btn {
+    width: 36px;
+    height: 36px;
     font-size: 20px;
   }
+
+  .breadcrumb-inner {
+    font-size: 14px;
+  }
+
   .info-card li {
     font-size: 16px;
   }
-  .card p {
-    font-size: 14px;
-  }
-  .promo-text {
-    font-size: 18px;
-  }
+
   .rating-text {
     font-size: 15px;
   }
-  .news-title {
-    font-size: 18px;
+}
+/* Переопределение hero для мобильных – без абсолютного позиционирования */
+@media (max-width: 1024px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    background: #eef4e9;
   }
-  .news-excerpt {
-    font-size: 14px;
+  .hero-bg {
+    width: 100%;
+    height: auto;
+    position: relative;
+    order: 1;
   }
-  .breadcrumb-inner {
-    font-size: 12px;
+  .hero-overlay {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
   }
-  .green-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    width: auto;
-    min-width: 160px;
+  .hero-content {
+    position: relative;
+    transform: none;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(3px);
+    border-radius: 28px;
   }
-  .class-dropdown {
-    font-size: 16px;
-    padding: 8px 12px;
+  .hero-img {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    right: auto;
+    bottom: auto;
+    margin: 0 auto;
   }
-  .gallery-controls .arrow-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    display: none;
+    background: linear-gradient(135deg, #eef4e9 0%, #e0f0d8 100%);
   }
-  .dots .dot {
-    width: 10px;
-    height: 10px;
+  
+}
+
+/* Для десктопа (шире 1024px) оставляем первоначальный дизайн */
+@media (min-width: 1025px) {
+  .hero {
+    position: relative;
   }
+  .hero-bg {
+    width: 100%;
+    display: block;
+  }
+  .hero-overlay {
+    position: static;
+  }
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    max-width: 560px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(3px);
+    padding: 32px 28px;
+    border-radius: 28px;
+  }
+  .hero-img {
+    position: absolute;
+    width: 45%;
+    max-width: 640px;
+    right: 4%;
+    bottom: 10%;
+    border-radius: 32px;
+    object-fit: cover;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+  }
+}
+
+/* Улучшение таргетинга для сенсорных экранов */
+button,
+a,
+.nav-item,
+.green-btn,
+.arrow-btn,
+.dot,
+.page-btn,
+.category-chip {
+  touch-action: manipulation;
+}
+
+/* Поддержка горизонтальной прокрутки для таблиц и галереи */
+.schedule-table-container,
+.gallery-track {
+  -webkit-overflow-scrolling: touch;
 }
